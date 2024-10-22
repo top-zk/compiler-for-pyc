@@ -1,7 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "scanner.h"
+TokenType identifyTokenType(const char *token) {
+    if (strcmp(token, "+") == 0) return PLUS;
+    if (strcmp(token, "-") == 0) return MINUS;
+    if (strcmp(token, "*") == 0) return MUL;
+    if (strcmp(token, "/") == 0) return DIV;
+    if (strcmp(token, "%") == 0) return MOD;
+    if (strcmp(token, "++") == 0) return PPLUS;
+    if (strcmp(token, "--") == 0) return MMINUS;
+    if (strcmp(token, "**") == 0) return POWER;
+    if (strcmp(token, "<") == 0) return LT;
+    if (strcmp(token, ">") == 0) return GT;
+    if (strcmp(token, "<=") == 0) return LTE;
+    if (strcmp(token, ">=") == 0) return GTE;
+    if (strcmp(token, "==") == 0) return EQ;
+    if (strcmp(token, "!=") == 0) return UNEQ;
+    if (strcmp(token, "&&") == 0) return AAND;
+    if (strcmp(token, "||") == 0) return OR;
+    if (strcmp(token, "!") == 0) return NOT;
+    if (strcmp(token, "=") == 0) return ASSIGN;
+    if (strcmp(token, "+=") == 0) return PLUS_ASSIGN;
+    if (strcmp(token, "-=") == 0) return MINUS_ASSIGN;
+    if (strcmp(token, "*=") == 0) return MUL_ASSIGN;
+    if (strcmp(token, "/=") == 0) return DIV_ASSIGN;
+    if (strcmp(token, "%=") == 0) return MOD_ASSIGN;
+    if (strcmp(token, "**=") == 0) return POWER_ASSIGN;
+    if (strcmp(token, "&") == 0) return AND;
+    if (strcmp(token, "<<") == 0) return LEFT_SHIFT;
+    if (strcmp(token, ">>") == 0) return RIGHT_SHIFT;
+    if (strcmp(token, "?") == 0) return TERNARY;
+    if (strcmp(token, ":") == 0) return COLON;
+    if (strcmp(token, ";") == 0) return SEMI;
+    if (strcmp(token, ",") == 0) return COMMA;
+    if (strcmp(token, "{") == 0) return LCUR;
+    if (strcmp(token, "}") == 0) return RCUR;
+    if (strcmp(token, "(") == 0) return LPAR;
+    if (strcmp(token, ")") == 0) return RPAR;
+    if (strcmp(token, "[") == 0) return LBRA;
+    if (strcmp(token, "]") == 0) return RBRA;
+    if (strcmp(token, "\n") == 0) return NEWLINE;
+    if (strcmp(token, ":") == 0) return COLON;
+    if (strcmp(token, ";") == 0) return SEMI;
+    if (strcmp(token, ",") == 0) return COMMA;
 
+    // 如果token不是上述任何一种，则返回UNKNOWN
+    return UNKNOWN;
+}
 void initList(List *list)
 {
   list->head = NULL;
