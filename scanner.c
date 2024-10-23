@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 #include "scanner.h"
 TokenType identifyTokenType(const char *token) {
     if (strcmp(token, "+") == 0) return PLUS;
