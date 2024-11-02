@@ -85,15 +85,24 @@ void addToken(List *list, TokenType type, const char *info)
   list->size++;
 }
 
-void tokenizeFile(List *list, FILE *file)
-{
-  char ch;
-  
+void tokenizeFile(List *list, FILE *file) {
+    char buffer[1024];
+    char *token;
+
+    while (fgets(buffer, sizeof(buffer), file)) {
+        token = strtok(buffer, " \t\n"); // 解析单个行中的token
+        while (token) {
+            TokenType type = identifyTokenType(token);
+            if (type != UNKNOWN) {
+                addToken(list, type, token);
+            } else {
+                // 处理未知token
+            }
+            token = strtok(NULL, " \t\n");
+        }
+    }
 }
-TokenType identifyTokenType(const char *token)
-{
-   
-}
+
 void printTokens(const List *list)
 {
   Node *current = list->head;
@@ -139,11 +148,6 @@ int main(int argc, char *argv[])
     return 1;
   }
   List tokenList;
-  initList(&tokenList);
-
-  tokenizeFile(&tokenList, file);
-
-  printTokens(&tokenList);
 
   fclose(file);
   freeList(&tokenList);
